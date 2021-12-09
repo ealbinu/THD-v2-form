@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        include app/pug/_head.pug
+    body 
+        #q-app
+            .containment.q-pa-md
+                //Header
+                .row.q-my-md: .col-12.text-center: q-img(src="app/thehomedepot.svg" alt="The Home Depot" style="max-width: 120px")
+                //Certificados
+                include app/pug/_certificados.pug
+                //Certificados (Dialog - Modal)
+                include app/pug/_dialogCertificado.pug
+                //Actividad
+                include app/pug/_activity.pug
+                //Ticket
+                include app/pug/_ticket.pug
+                //Form
+                include app/pug/_formulario.pug
+        
+            //Footer Blue
+            include app/pug/_blue.pug
+
+        include app/pug/_scripts.pug

@@ -1,0 +1,14 @@
+section.bg-primary.q-pa-md.rounded-borders.shadow-24
+    .row
+        .col-10.offset-1.text-center.text-white.q-py-md
+            .text-h5.text-bold Bienvenido a
+            .text-h4.text-bold Burbujas de Pintura
+            .text-h6.q-mt-md Antes de empezar, por favor indica el certificado electrónico que quisieras recibir en caso de resultar ganador.
+            .text-h6.q-mt-md Selecciona tu certificado de valor indicado.
+
+    .row.q-mt-3.justify-center.q-col-gutter-md
+        .col-6.col-sm-3.col-md-2(v-for="(i, index) in certificados" @click="openit(i)")
+            q-card.shadow-0.cursor-pointer
+                q-card-section.text-center
+                    div: q-img(:src="'app/cert/'+i[0]+'.png'" style="max-width: 120px")
+                    div: q-badge(:label="i[2]" color="primary")
