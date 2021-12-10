@@ -43,4 +43,9 @@ footer.blue {
 .politica a {
   color: #fff;
 }
+.dialogFormCard {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 /*# sourceMappingURL=app.css.map */

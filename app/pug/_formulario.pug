@@ -1,5 +1,5 @@
 q-dialog(v-model="dialogForm" persistent maximized).dialogForm
-    q-card.bg-primary.shadow-0
+    q-card.bg-primary.shadow-0.dialogFormCard
         .row.q-my-sm: .col-12.text-center: q-img(src="app/thehomedepot.svg" alt="The Home Depot" style="max-width: 100px")
         q-card-section(style="max-width: 600px;").q-mx-auto
             .text-h6.text-bold.text-center.text-white Llena el formulario para participar.
@@ -8,14 +8,15 @@ q-dialog(v-model="dialogForm" persistent maximized).dialogForm
                 .bg-white.rounded-borders.q-pa-sm
                     q-input(dense v-model="formdata.Email" label="Correo electrónico" type="email" filled required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
                         template(v-slot:append): q-icon(name="email")
-                    q-input(dense v-model="formdata.CellPhone" label="Teléfono móvil" type="tel" hint="Es importante que registre su número de celular correcto, se enviará un SMS de verificación al número celular registrado." filled mask="(##) #### ####" fill-mask unmasked-value  required :rules="[val => !!val && val.length == 10 || 'Ingresa un teléfono móvil de 10 dígitos.']").q-my-md
+                    q-input(dense v-model="formdata.CellPhone" label="Teléfono celular" type="tel" hint="Es importante que registre su número de celular correcto, se enviará un SMS de verificación al número celular registrado." filled mask="(##) #### ####" fill-mask unmasked-value  required :rules="[val => !!val && val.length == 10 || 'Ingresa un teléfono celular de 10 dígitos.']").q-my-md
                         template(v-slot:append): q-icon(name="smartphone")
-                    q-input(dense v-model="formdata.FirstName" label="Nombre" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
-                        template(v-slot:append): q-icon(name="person")
-                    q-input(dense v-model="formdata.LastName" label="Apellido materno" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
-                        template(v-slot:append): q-icon(name="person")
-                    q-input(dense v-model="formdata.LastName2" label="Apellido paterno" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
-                        template(v-slot:append): q-icon(name="person")
+                    template(v-if="!isSimple")
+                        q-input(dense v-model="formdata.FirstName" label="Nombre" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
+                            template(v-slot:append): q-icon(name="person")
+                        q-input(dense v-model="formdata.LastName" label="Apellido materno" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
+                            template(v-slot:append): q-icon(name="person")
+                        q-input(dense v-model="formdata.LastName2" label="Apellido paterno" filled  required :rules="[val => !!val || 'Campo requerido.']").q-my-sm
+                            template(v-slot:append): q-icon(name="person")
 
                 div.politica.text-caption.q-my-sm Tu privacidad es muy importante para The Home Depot. Al momento de proporcionarnos tus datos personales tales como nombre, dirección, teléfono, registro federal de contribuyentes (RFC) o Clave Única de Registro de Población (CURP), entre otros (en lo sucesivo los “Datos Personales”) estás consintiendo la manera en que obtenemos, utilizamos, compartimos o almacenamos tus Datos Personales en México conforme al presente #[a(target="_blank" href="https://www.homedepot.com.mx/aviso-privacidad?catalogId=10101&storeId=10351&storeId=10351&krypto=TCt%2FI1bNJidAOpYnW1U7jMgfcwpZlcBs29GblFjGOwC4n%2BjVtQ0dyc%2B004kOGi2GNAUmYXRX%2FNvRblBX3l9LvJVNG0nufn6xXUKGJQ96TC63pJXRG40d59D7x9rJgrXFt8uRSYPigszip0a3c%2BSaZW8r6mAX3M5a54sBdRQShxw%3D") Aviso de Privacidad].
                 q-btn(label="Continuar" push size="lg" text-color="primary" color="white" type="submit").q-mt-sm
@@ -33,3 +34,4 @@ q-dialog(v-model="dialogForm" persistent maximized).dialogForm
                         template(v-slot:append): q-icon(name="pin")
                     div: q-btn(label="Cancelar" push size="sm" color="grey" @click="cancelDialogFormSMS").q-my-xs
                     div: q-btn(label="Verificar" push size="lg" color="primary" type="submit").q-my-sm
+        include _blue.pug

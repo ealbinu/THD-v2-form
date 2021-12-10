@@ -18,8 +18,8 @@ const app = Vue.createApp({
             ['facturafiel', '<p>Crea FacturaFiel.com  brinda a sus usuarios la mejor opción costo-beneficio existente en el mercado para expedir facturas y Comprobantes Fiscales Digitales por Internet (CFDI). Esta tarjeta es válida por 25 folios.</p>', '$200', 'FacturaFiel.com'],
             ['superdoctor', '<p>Tarjeta súper Doctor - 3 meses, algunos de los beneficios son: Asistencia Nutricional telefónica ilimitada, Asistencia Psicológica telefónica ilimitada,  Asistencia Médica telefónica 24/7 ilimitada, Doctor en tu Casa sin costo 3 consultas (Limitado a 1 consulta al mes), Asistencia Dental 2 consultas + limpieza sin costo, Servicio de Ambulancia sin costo (2 eventos), Asistencia VISUAL en Ópticas Devlyn, DescuentaMx disfruta de increíbles descuentos en: Farmacias, Laboratorios, Restaurantes, entretenimiento, entre otros.</p>', '$240', 'Súper Doctor'],
             ['cinepolis', '<p>¡Disfruta los mejores estrenos!, Cinépolis Klic es la plataforma de streaming de Cinépolis con los estrenos recién salidos del cine, las mejores películas de catálogo, series de TV y entretenimiento para toda la familia. Este código te permitirá disfrutar de 4 películas disponible en renta y renta anticipada.</p>', '$200', 'Cinépolis Klic'],
-            ['mixup', '<p>Mixup ¡La tienda más divertida! Música, películas, libros, videojuegos, audífonos, bocinas, cables, juguetes y tecnología. Código válido únicamente para compras en línea. </p>', '$200',  'Mixup'],
-            ['enviaflores', '<p>Envía flores, globos y regalos a todo México y sorprende a esa persona especial. Úsalo en <a href="https://www.enviaflores.com" target="_blank">www.enviaflores.com</a> o a la app iOS (enviaflores.com).</p>', '$250', 'Enviaflores.com'],
+            //['mixup', '<p>Mixup ¡La tienda más divertida! Música, películas, libros, videojuegos, audífonos, bocinas, cables, juguetes y tecnología. Código válido únicamente para compras en línea. </p>', '$200',  'Mixup'],
+            //['enviaflores', '<p>Envía flores, globos y regalos a todo México y sorprende a esa persona especial. Úsalo en <a href="https://www.enviaflores.com" target="_blank">www.enviaflores.com</a> o a la app iOS (enviaflores.com).</p>', '$250', 'Enviaflores.com'],
             ['gandhi', '<p>En Gandhi, busca y compra el libro que estás deseando de una manera Fácil y Segura. Código válido unicamente en <a href="https://www.gandhi.com.mx" target="_blank">www.gandhi.com.mx</a>, este código no es válido en tiendas físicas ni en Walmart y Palacio de Hierro.</p>', '$200', 'Librerías Gandhi'],
             ['puntosfutbol', '<p>Puntos Fútbol es una plataforma de entretenimiento para los fanátic@s del Fútbol, usa tu saldo para partiicpar en Trivias, Subastas, Marcadores y Retas donde podrás demostrar tus conocimientos y ganar increíbles premios.</p>', '$200', 'Puntos Futbol'],
         ]
@@ -44,11 +44,19 @@ const app = Vue.createApp({
             IPAddress: null,
             Email: null,
             CellPhone: null,
-            FirstName: null,
-            LastName: null,
-            LastName2: null
+            FirstName: "",
+            LastName: "",
+            LastName2: ""
         })
         const formdataSMS = ref(null)
+
+
+        const queryString = window.location.search
+        const params = new URLSearchParams(queryString)
+        const simpleParam = params.get('simple')
+        console.log('SimpleParam:', simpleParam)
+        const isSimple = simpleParam == "" ? true : false
+        console.warn(isSimple)
 
 
         const userData = ref({
@@ -105,7 +113,7 @@ const app = Vue.createApp({
             axios.post(api+'/SetDataParticipate', formdata.value)
                 .then((res) => {
                     const resdata = JSON.parse(res.data.d)
-                    if(resdata.ResultID){
+                    if(resdata.ResultID>0){
                         dialogFormSMS.value = true
                         userData.value.CustomerID = resdata.ResultID
                     } else {
@@ -191,7 +199,8 @@ const app = Vue.createApp({
             dialogFormSMS,
             formSubmitSMS,
             formdataSMS,
-            cancelDialogFormSMS
+            cancelDialogFormSMS,
+            isSimple
         }
     }
 })
