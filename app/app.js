@@ -1,6 +1,5 @@
 const { ref } = Vue
 const { useQuasar } = Quasar
-            axios.post('Colocar el siguiente texto: “Es importante que registre su número de celular correcto, se enviará un SMS de verificación al número celular registrado.')
 const api = 'https://testing4.myblueengine.com/WebSiteHomeDepot/Services.aspx'
 const app = Vue.createApp({
     setup(context) {
