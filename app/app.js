@@ -54,9 +54,7 @@ const app = Vue.createApp({
         const queryString = window.location.search
         const params = new URLSearchParams(queryString)
         const simpleParam = params.get('simple')
-        console.log('SimpleParam:', simpleParam)
         const isSimple = simpleParam == "" ? true : false
-        console.warn(isSimple)
 
 
         const userData = ref({
